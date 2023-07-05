@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensor de humedad</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBk66Lj3rQh5hokKHw7EpK1fdDxb6ppTVI",
+          authDomain: "sensor-prueba-a4f3b.firebaseapp.com",
+          databaseURL: "https://sensor-prueba-a4f3b-default-rtdb.firebaseio.com",
+          projectId: "sensor-prueba-a4f3b",
+          storageBucket: "sensor-prueba-a4f3b.appspot.com",
+          messagingSenderId: "329847726128",
+          appId: "1:329847726128:web:a6d003ae3aa556b5764df5"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        import{
+            get,
+            getDatabase,
+            child,
+            ref,
+            onValue,
+        }from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+            
+            const db=getDatabase();
+            const Sensor=document.getElementById("valorBD");
+            var valor=ref(db,"sensor");
+            onValue(valor,(snapshot)=>{
+                valor=JSON.stringify(snapshot.val(),null,3);
+            
+            if(valor=="1"){
+                circuloId.style.backgroundColor="green";
+            }else{
+                circuloId.style.backgroundColor="red";
+            }
+            });
+      </script>
+    <div class="fondo-enterDetail center">
+        <h1>Sensor 1</h1>
+        <span class="fondo-dot" id="circuloId"></span>
+        <pre id="valorBD"></pre>
+    </div>
+</body>
+</html>
